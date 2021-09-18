@@ -20,21 +20,21 @@ int main() {
 		{
 			break;
 		}
-		
+
 	}
-		
-	
-	
+
+
+
 	return 0;
 }
 
 
 bool TTT() {
-	
+
 	//std::cout << "********  welcome to tic tac toe! ********" << std::endl;
 
 	char gameboard[3][3];
-    for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++) {
 
@@ -44,11 +44,11 @@ bool TTT() {
 
 	}
 	gameLayout(gameboard);
-	
 
 
 
-	
+
+
 
 	int turn = (1);
 	bool gameWon = false;
@@ -74,8 +74,8 @@ bool TTT() {
 		++turn; // Adds one turn to the game
 
 
-		while (true)  {
-			
+		while (true) {
+
 			std::cin >> input;
 			if (std::cin.fail() or (input < 1 || input > 9))
 			{
@@ -83,7 +83,7 @@ bool TTT() {
 				std::cin.ignore();
 				std::cout << "Try another input";
 
-				
+
 			}
 			else
 			{
@@ -93,12 +93,12 @@ bool TTT() {
 
 		}
 
-		if (!takenMarker(input,gameboard)) {
+		if (!takenMarker(input, gameboard)) {
 			(std::cout << "This position on the board is already taken.. please try again!" << std::endl);
 			turn--;
 		}
 
-		
+
 
 		if (turn == 9) {
 
@@ -106,15 +106,15 @@ bool TTT() {
 
 			std::cin >> retry;
 
-			
+
 
 			switch (toupper(retry))
 			{
 			case 'Y':
 				system("cls");
-		
+
 				return true;
-				
+
 				break;
 			case 'N':
 				return false;
@@ -135,14 +135,14 @@ bool TTT() {
 
 }
 
-bool checker(int) 
+bool checker(int)
 {
 
 
 
 
 	return true;
-	}
+}
 //CALLING INN PARAMETERS,makes it easier for the program to understand what going to happen, (headsup).
 //calling gameboard since it¨s local to ttt
 void gameLayout(char gameboard[][3]) {
