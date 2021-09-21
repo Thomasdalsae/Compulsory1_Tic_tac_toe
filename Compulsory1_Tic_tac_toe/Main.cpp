@@ -1,21 +1,19 @@
 #include <iostream>
 #include <cstdlib>
 #include <conio.h>
-void gameLayout(char gameboard[3][3]);
+void gameLayout(char gameboard[][3]);
 bool TTT();
 
-bool takenMarker(int, char gameboard[3][3]);
-bool checker(int);
+bool takenMarker(int, char gameboard[][3]);
+bool checker(char gameBoard[][3]);
 char templateBoard[3][3] = { {'1','2','3'}, {'4','5','6'}, {'7','8','9'} };
-char currentmarker;
-//bool playerOne = true;
-int input{};
+
 
 
 
 char gameBoard[3][3] = { {'1','2','3'}, {'4','5','6'}, {'7','8','9'} };
 char currentmarker;
-bool playerOne = true;
+
 int input{};
 
 
@@ -87,7 +85,7 @@ bool TTT() {
 			if (std::cin.fail() or (input < 1 || input > 9))
 			{
 				std::cin.clear();
-				std::cin.ignore();
+				std::cin.ignore(32767, '\n');
 				std::cout << "Try another input";
 
 
@@ -105,6 +103,12 @@ bool TTT() {
 			turn--;
 		}
 
+		if ( checker(gameboard) )
+		{
+			gameLayout(gameboard);
+			std::cout << "Win!" << std::endl;
+			return false;
+		}
 
 
 		if (turn == 9) {
@@ -142,13 +146,36 @@ bool TTT() {
 
 }
 
-bool checker(int)
+bool checker(char gameBoard[][3])
 {
 
+	for (size_t i = 0; i < sizeof(gameBoard[0]) / sizeof(gameBoard[0][0]); i++)
+	{
+		if (gameBoard[i][0] == gameBoard[i][1] && gameBoard[i][0] == gameBoard[i][2])
+		{
+			return true;
+		}
+	}
+	for (size_t j = 0; j < sizeof(gameBoard[0]) / sizeof(gameBoard[0][0]); j++)
+	{
+		if (gameBoard[0][j] == gameBoard[1][j] && gameBoard[0][j] == gameBoard[2][j])
+		{
+			return true;
+		}
+	}
+	if (gameBoard[0][0] == gameBoard[1][1] && gameBoard[0][0] == gameBoard[2][2])
+	{
+		return true;
+	}
+	if (gameBoard[0][2] == gameBoard[1][1] && gameBoard[0][2] == gameBoard[2][0])
+	{
+		return true;
+	}
+	
 
+	
 
-
-	return true;
+	return false;
 }
 //CALLING INN PARAMETERS,makes it easier for the program to understand what going to happen, (headsup).
 //calling gameboard since it¨s local to ttt
