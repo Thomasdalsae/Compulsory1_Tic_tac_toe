@@ -1,7 +1,5 @@
 #include "declear.h"
 
-
-
 int main() {
 	
 	//This loop is to keep the game running.
@@ -9,39 +7,39 @@ int main() {
 	{
 		TTT();
 		
-			std::cout << "Do you want to play again? y/n";
-			std::cin >> retry;
-			//switch case inputs to keep playing or exit.
-			switch (toupper(retry))
-			{
-			case 'Y':
+		std::cout << "Do you want to play again? y/n";
+		std::cin >> retry;
+		//switch case inputs to keep playing or exit.
+		switch (toupper(retry))
+		{
+		case 'Y':
 				
-				system("cls");
+			system("cls");
 
-				break;
-			case 'N':
-				system("cls");
-				exit(0);
+			break;
+		case 'N':
+			system("cls");
+			exit(0);
 
-				break;
-			default:
-				return false;
-				break;
-			}
+			break;
+		default:
+			return false;
+			break;
+		}
 	}
 
 	return 0;
 }
-
-//TickTackToe.
+	//TickTackToe.
 bool TTT() {
 	std::cout << "******  welcome to tic tac toe! ******" << std::endl << std::endl;
 	//declare my array and makes the gameboard.
+	//This is also to reset the gameboard when it restarts.
 	char gameboard[3][3];
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++) {
-			//makes the array slots ready.
+	//makes the array slots ready.
 			gameboard[i][j] = templateBoard[i][j];
 		}
 	}
@@ -49,16 +47,14 @@ bool TTT() {
 
 	int turn{1};
 	bool gameWon{false};
-	//Players input after the game ends, it's for the switch case activation.
 	
 	//When the game is not won, keep running.
 	while (!gameWon)
 	{
 		std::cout << "Turn:" << turn << std::endl;
-		if (turn % 2 != 0) //every even is O)
-		{
+		if (turn % 2 != 0) 
+		{   //every even is O)
 			std::cout << "Player 1" << std::endl << "choose a number from 1 to 9  :";
-
 			currentmarker = 'O';
 		}
 		else
@@ -71,13 +67,12 @@ bool TTT() {
 		while (true) {
 
 			std::cin >> input;
-
 			//This function returns true when an input failure occurs, my input is a int. if the input is less than one or bigger than 9 retry.
 			if (std::cin.fail() || (input < 1 || input > 9))
 			{
 				//cin.clear removes the error flag on my (cin >> input line)
 				std::cin.clear();
-				//cin.ingore ignores a whole line or to a new line start.(32767 is the size in bytes for a whole line)
+				//cin.ignore ignores a whole line or to a new line start.(32767 is the size in bytes for a whole line)
 				std::cin.ignore(32767, '\n');
 				std::cout << "Try another input";
 			}
@@ -86,13 +81,13 @@ bool TTT() {
 				break;
 			}
 		}
-		//this takes the input from the player, tries to place it on the baord. if the location already have a X/O it will ask to try again.
+		//this takes the input from the player, tries to place it on the board. if the location already have a X/O it will ask to try again.
 		if (!takenMarker(input, gameboard)) {
 			(std::cout << "This position on the board is already taken.. please try again!" << std::endl);
 			turn--;
 		}
-		//it checks if someone has won on the current gameboard.if the winchecker finds a winning condition 
-		//it will print the gameboard and the current winner based on currentmarker.
+		/*it checks if someone has won on the current gameboard.if the winchecker finds a winning condition
+		it will print the gameboard and the current winner based on currentmarker.*/
 		if ( winChecker(gameboard) )
 		{
 			updateBoard(gameboard);
@@ -119,8 +114,8 @@ bool TTT() {
 }
 bool winChecker(char gameBoardChecker[][3])
 {
-	//Using sizeof as a parameter, check if [0][0] has the same marker as [0][1] and if [0][0] has the same marker as[0][2]. repeat for each row
-	//Using sizeof as a parameter, check if [0][0] has the same marker as [1][0] and if [0][0] has the same marker as[2][0]. repeat for each column
+	//Using sizeof to find the size of the array, check if [0][0] has the same marker as [0][1] and if [0][0] has the same marker as[0][2]. repeat for each row
+	//Using sizeof to find the size of the array, check if [0][0] has the same marker as [1][0] and if [0][0] has the same marker as[2][0]. repeat for each column
 	for (size_t i = 0; i < sizeof(gameBoardChecker[0]) / sizeof(gameBoardChecker[0][0]); i++)
 	{
 		if (gameBoardChecker[i][0] == gameBoardChecker[i][1] && gameBoardChecker[i][0] == gameBoardChecker[i][2])
@@ -156,10 +151,10 @@ void updateBoard(char gameboard[][3]) {
 
 	std::cout << std::endl;
 }
-//this a more mathematic way of going trough [0][0] all the way to [2][2]
+//this is a more mathematic way of going trough [0][0] all the way to [2][2], it checks choosen place on the gamebaord is open or not.
 bool takenMarker(int place, char gameboard[][3]) {
 	//row will be same as place, then Divide with 3.
-	int row = place / 3; {}
+	int row = place / 3;
 	int col;
 	//checks if the remainder is equals to 0(checks if the selected position is divisible by 3)
 	if (place % 3 == 0)
