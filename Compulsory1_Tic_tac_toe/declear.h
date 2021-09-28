@@ -12,7 +12,7 @@ bool TTT();
 
 
 char templateBoard[3][3] = { {'1','2','3'}, {'4','5','6'}, {'7','8','9'} };
-
+char retry{};
 
 
 //This is to decide which type of marker should be placed where (O/X)
